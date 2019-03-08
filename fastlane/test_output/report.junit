@@ -1,9 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<testsuites name='JenkinsWithFastlineTests.xctest' tests='2' failures='1'>
-  <testsuite name='JenkinsWithFastlineTests.JenkinsWithFastlineTests' tests='2' failures='1'>
-    <testcase classname='JenkinsWithFastlineTests.JenkinsWithFastlineTests' name='testExample'>
-      <failure message='XCTAssertTrue failed - Fail test'>JenkinsWithFastlineTests/JenkinsWithFastlineTests.swift:24</failure>
-    </testcase>
-    <testcase classname='JenkinsWithFastlineTests.JenkinsWithFastlineTests' name='testPerformanceExample' time='1.187'/>
-  </testsuite>
-</testsuites>
