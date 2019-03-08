@@ -30,7 +30,7 @@ platform :ios do
       scheme: "JenkinsWithFastline",
       clean: true,
       export_method: 'enterprise',
-      output_directory: "~/Desktop", # Destination directory. Defaults to current directory.
+      output_directory: "~/Desktop/jenkins_with_fastlane/ipa", # Destination directory. Defaults to current directory.
       output_name: "fastlane_jenkins.ipa",
       include_bitcode: false,
       sdk: "iOS 12.1",
