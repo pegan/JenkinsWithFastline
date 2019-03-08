@@ -29,7 +29,7 @@ platform :ios do
       configuration: "Release",
       scheme: "JenkinsWithFastline",
       clean: true,
-      export_method: 'distribution',
+      export_method: 'enterprise',
       output_directory: "~/Desktop", # Destination directory. Defaults to current directory.
       output_name: "fastlane_jenkins.ipa",
       include_bitcode: false,
