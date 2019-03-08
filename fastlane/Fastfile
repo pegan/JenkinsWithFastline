@@ -26,12 +26,16 @@ platform :ios do
     
    lane :generate_ipa_develop do
     build_ios_app(
-      configuration: "Debug",
+      configuration: "Release",
       scheme: "JenkinsWithFastline",
       clean: true,
-      export_method: 'development',
+      export_method: 'distribution',
       output_directory: "~/Desktop", # Destination directory. Defaults to current directory.
       output_name: "fastlane_jenkins.ipa",
+      include_bitcode: false,
+      sdk: "iOS 12.1",
+      clean: true,
+      silent: true
     )
     end
     		  	  
