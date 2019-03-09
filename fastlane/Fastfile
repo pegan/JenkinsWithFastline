@@ -20,8 +20,8 @@ platform :ios do
   
   lane :tests do
     # add actions here: https://docs.fastlane.tools/actions
-	run_tests(devices: ["iPhone XR"],
-    		  	  scheme: "JenkinsWithFastline")
+# 	run_tests(devices: ["iPhone XR"],
+#     		  	  scheme: "JenkinsWithFastline")
     end
     
    lane :generate_ipa_develop do
