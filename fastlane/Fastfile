@@ -18,10 +18,11 @@ default_platform(:ios)
 platform :ios do
   desc "Perform Unit Tests and build IPA"
   
-  lane :tests do
+  lane :test do
     # add actions here: https://docs.fastlane.tools/actions
 # 	run_tests(devices: ["iPhone XR"],
 #     		  	  scheme: "JenkinsWithFastline")
+	scan(scheme: "JenkinsWithFastline")
     end
     
    lane :generate_ipa_develop do
