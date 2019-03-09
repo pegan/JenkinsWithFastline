@@ -7,10 +7,10 @@
 # Remove the # in front of the line to enable the option
 
 scheme("JenkinsWithFastline")
-devices(["iPhone XR", "iPad Air"])
+devices(["iPhone XR"])
 
 output_directory("~/Desktop/jenkins_with_fastlane/build_result/")
-open_report(false)
+open_report(true)
 output_types("html")
 
 clean(false)
