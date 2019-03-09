@@ -10,7 +10,7 @@ scheme("JenkinsWithFastline")
 devices(["iPhone XR"])
 
 output_directory("~/Desktop/jenkins_with_fastlane/build_result/")
-open_report(true)
+open_report(false)
 output_types("html")
 
 clean(false)
