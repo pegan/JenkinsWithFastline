@@ -6,10 +6,8 @@
 
 # Remove the # in front of the line to enable the option
 
-scheme("JenkinsWithFastline")
 devices(["iPhone XR"])
 
-output_directory("~/Desktop/jenkins_with_fastlane/build_result/")
 open_report(false)
 output_types("html")
 
@@ -17,3 +15,8 @@ clean(false)
 
 # Enable skip_build to skip debug builds for faster test performance
 skip_build(true)
+
+# Slack
+slack_only_on_failure(true)
+slack_channel("#general")
+# slack_message("Successfully distributed a new beta build")

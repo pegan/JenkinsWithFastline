@@ -1,0 +1,30 @@
+//
+//  Config.xcconfig
+//
+//  Created by Piotr Perzanowski on 3/11/19.
+//  Copyright © 2019 Perzanowski Piotr. All rights reserved.
+//
+
+// Configuration settings file format documentation can be found at:
+// https://help.apple.com/xcode/#/dev745c5c974
+
+// PROJECT > Info > Configuration > Develop > RemoteSE Dev / RemoteSE Prod / DPRemoteTests > Based on configuration file: Debug
+// PROJECT > Info > Configuration > Release > RemoteSE Dev / RemoteSE Prod / DPRemoteTests > Based on configuration file: Release
+//
+//
+// Target Preprocessors:
+// Apple LLVM 7.0 - Preprocessing > Preprocessor Macros > Debug/Release:
+//
+// RemoteSE Dev:  DEV=1
+// RemoteSE Distr: DISTR=1
+// RemoteSE Prod: PROD=1
+//
+// For Swift
+// RemoteSE Prod: Swift Compiler - Custom Flags > Other Swift Flags > `-DPRODUCTION`
+
+APP_NAME = DealerPad
+
+APP_VERSION_PROD = 5.2.4
+APP_VERSION_DEV = 5.2.5
+
+APP_BUILD_VERSION = 28

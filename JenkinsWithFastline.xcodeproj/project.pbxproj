@@ -362,6 +362,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = MC4SKP6TFN;
 				INFOPLIST_FILE = JenkinsWithFastline/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -373,6 +374,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "ITH Enterprise Generic";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -382,6 +384,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 5;
 				DEVELOPMENT_TEAM = MC4SKP6TFN;
 				INFOPLIST_FILE = JenkinsWithFastline/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -393,6 +396,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "ITH Enterprise Generic";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
@@ -400,7 +404,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = MC4SKP6TFN;
 				INFOPLIST_FILE = JenkinsWithFastlineTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -410,6 +414,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ith.enterprise.JenkinsWithFastlineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JenkinsWithFastline.app/JenkinsWithFastline";
@@ -420,7 +425,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = MC4SKP6TFN;
 				INFOPLIST_FILE = JenkinsWithFastlineTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -430,6 +435,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.ith.enterprise.JenkinsWithFastlineTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JenkinsWithFastline.app/JenkinsWithFastline";

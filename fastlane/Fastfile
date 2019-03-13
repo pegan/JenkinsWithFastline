@@ -16,28 +16,185 @@
 default_platform(:ios)
 
 platform :ios do
-  desc "Perform Unit Tests and build IPA"
-  
-  lane :test do
-    # add actions here: https://docs.fastlane.tools/actions
-# 	run_tests(devices: ["iPhone XR"],
-#     		  	  scheme: "JenkinsWithFastline")
-# 	scan(scheme: "JenkinsWithFastline")
-    end
-    
-   lane :generate_ipa_develop do
-    build_ios_app(
-      configuration: "Release",
-      scheme: "JenkinsWithFastline",
-      clean: true,
-      export_method: 'enterprise',
-      output_directory: "~/Desktop/jenkins_with_fastlane/ipa", # Destination directory. Defaults to current directory.
-      output_name: "fastlane_jenkins.ipa",
-      include_bitcode: false,
-      sdk: "iOS 12.1",
-      clean: true,
-      silent: true
-    )
-    end
+	desc "Perform Scan & Gym"
+	
+	before_all do
+		begin
+			setup_env()
+		rescue => exception
+			on_error(exception)
+		end
+	end
+	
+	def setup_env()
+		### constants
+		
+		time = Time.new
+		date = time.strftime("%Y-%m-%d_%H.%M")
+		xcodeproj = "JenkinsWithFastline.xcodeproj"
+		target = "JenkinsWithFastline"
+		pwd = ENV["PWD"]
+		base_dir = "~/Dropbox/Developer/Jenkins/jenkins_with_fastlane/Example"
+		version_no = get_version_number(xcodeproj: xcodeproj, target: target)
+		
+		increment_build_number(
+			build_number: "5" # set a specific number
+		)
+		
+		build_no = get_build_number(xcodeproj: xcodeproj)
+		
+		#### setup
+		
+		ENV["DATE"] ||= date
+		ENV["BASE_DIR"] ||= base_dir
+		
+		ENV["SLACK_URL"] ||= "https://hooks.slack.com/services/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"
+		ENV["SLACK_CHANEL"] ||= "#general"
+		
+		ENV["SCHEMA"] ||= target
+		ENV["SDK"] ||= "iphoneos12.1"
+		
+		ENV["VERSION_NUMBER"] ||= version_no.gsub('.', '_')
+		ENV["BUILD_NUMBER"] ||= build_no
+		
+		ENV["REPORT_DIR"] ||= "#{base_dir}/Report/#{date}/"
+		ENV["IPA_PROD_DIR"] ||= "#{base_dir}/IPA/PROD/#{date}/"
+		
+		path = "#{pwd}/#{target}/Core.xcconfig"
+		lines = File.readlines path
+		
+# 		UI.important path
+		
+		lines.each do |line|
+			#prod_version = line[/APP_VERSION_PROD = ([^\s]+)/, 1]
+			#dev_version = line[/APP_VERSION_DEV = ([^\s]+)/, 1]
+			build_version = line[/APP_BUILD_VERSION = ([^\s]+)/, 1]
+
+# 			unless prod_version.nil? || prod_version == 0
+# 			    ENV["PROD_VERSION"] ||= prod_version.gsub('.', '_')
+# 			end
+# 			
+# 			unless dev_version.nil? || dev_version == 0
+# 		    	ENV["DEV_VERSION"] ||= dev_version.gsub('.', '_')
+# 			end
+			
+# 			unless build_version.nil? || build_version == 0
+# 		    	ENV["BUILD_NUMBER"] ||= build_version
+# 			end
+		end
+		
+		ENV["IPA_NAME"] ||= "MyApp-#{ENV["VERSION_NUMBER"]}_#{ENV["BUILD_NUMBER"]}"
+		
+		output = sh("printenv")
+		UI.important output
+		
+	end
+		
+	# -- release --
+	
+	lane :release do  		
+# 	  	scan(
+# 	  	  scheme: ENV["SCHEMA"],
+# 	  	  output_directory: ENV["REPORT_DIR"], 
+# 	  	  slack_url: ENV["SLACK_URL"]
+# 	  	)
+	  	
+# 	  	begin
+# 			gym(
+# 			  scheme: ENV["SCHEMA"],
+# 			  sdk: ENV["SDK"],
+# 			  output_directory: ENV["IPA_PROD_DIR"],
+# 			  output_name: ENV["IPA_NAME"]
+# # 			  ,manifest: {
+# # 				  appURL: "https://example.com/#{ipa_file}.ipa"
+# # 			  }
+# 			)
+# 		rescue => exception
+# 			on_error(exception)
+# 		end
+	end
+	
+	### release methods
+	
+	def on_error(exception)
+		slack(
+			message: "JenkinsWithFastline",
+			success: false,
+			slack_url: ENV["SLACK_URL"],
+			channel: "#general",
+			payload: { "Output" => "Fastlane error" },
+			attachment_properties: {
+				fields: [
+					{
+						title: "Build number",
+						value: ENV["BUILD_NUMBER"]
+					},
+					{
+						title: "Error message",
+						value: exception.to_s,
+						short: false
+					}
+				]
+			}
+		)
+	end
+	
+	# -- develop --
+	
+	lane :develop do
+		date = ENV["DATE"]
+		base_dir = ENV["BASE_DIR"]
+		
+		# add actions here: https://docs.fastlane.tools/actions
+		#run_tests(devices: ["iPhone XR"], scheme: "JenkinsWithFastline")
+    		  	  
+	  	scan(
+	  	  scheme: "JenkinsWithFastline",
+	  	  output_directory: "#{base_dir}/Report/#{date}/"
+	  	)
+	  	
+	  	build_ios_app(
+	  	  scheme: "JenkinsWithFastline",
+		  configuration: "Release",
+		  export_method: 'enterprise',
+		  output_directory: "#{base_dir}/IPA/DEV/#{date}/", # Destination directory. Defaults to current directory.
+		  output_name: "Example.ipa",
+		  include_bitcode: false,
+		  sdk: "iphoneos12.1",
+		  clean: true,
+		  silent: true
+		)
+	end
+	
+
+	
+	
+	
+	
+	
+	
+	# == Some examples ==
+	
+	# -- 1 --
+	
+	lane :date_example do
+		time = Time.new
+		date = time.strftime("%Y-%m-%d %H:%M:%S")
+	  	path = "Report_#{date}"
+	  	
+	  	UI.important "Date is: #{date}"
+	  	
+	  	# Environment Variables in Ruby
+	  	UI.important ENV.keys
+	  	UI.success ENV["BUNDLER_VERSION"]
+	end
+	
+	# -- 2 --
+	
+	lane :env_example do
+	  	# Environment Variables in Ruby
+	  	UI.important ENV.keys
+	  	UI.success ENV["BUNDLER_VERSION"]
+	end
     		  	  
 end
